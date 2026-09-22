@@ -1,0 +1,201 @@
+/* ============================================================
+   AutoGest — Styles Espace Employé (Harmonisé)
+   ============================================================ */
+
+:root {
+  --navy:         #0B1629;
+  --navy-light:   #162236;
+  --navy-border:  #1E3A5F;
+  --blue:         #3B82F6;
+  --blue-dark:    #1D4ED8;
+  --orange:       #F97316;
+  --orange-dark:  #EA580C;
+  --bg:           #F0F4F8;
+  --card:         #FFFFFF;
+  --text:         #0F172A;
+  --text-muted:   #64748B;
+  --text-light:   #94A3B8;
+  --border:       #E2E8F0;
+  --success:      #10B981;
+  --warning:      #F59E0B;
+  --danger:       #EF4444;
+
+  --radius:       12px;
+  --radius-sm:    8px;
+  --radius-lg:    16px;
+  --shadow-sm:    0 1px 3px rgba(0,0,0,.08);
+  --shadow:       0 4px 16px rgba(0,0,0,.09);
+  --shadow-lg:    0 8px 32px rgba(0,0,0,.14);
+  --transition:   .2s ease;
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+input, select, textarea { font-family: inherit; }
+a { text-decoration: none; color: inherit; }
+.hidden { display: none !important; }
+
+/* ---------- En-tête (Header) Professionnel ---------- */
+header {
+  height: 60px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow-sm);
+}
+
+header > div {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* ---------- Boutons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  padding: .5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: .875rem;
+  font-weight: 600;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.btn-primary { background: var(--orange); color: white; }
+.btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(249,115,22,.35); }
+.btn-secondary { background: var(--bg); color: var(--text); border: 1.5px solid var(--border); }
+.btn-secondary:hover { background: var(--border); }
+
+/* ---------- Conteneur Principal ---------- */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+section h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+  border-bottom: none !important; /* Supprime l'ancienne bordure basique */
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--orange);
+  border-radius: 2px;
+}
+
+/* ---------- Cartes de Véhicules (Style Administrateur) ---------- */
+.vehicle-card, #my-vehicle-container > div {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--transition), transform var(--transition);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+.vehicle-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+/* Grille des véhicules disponibles */
+#available-vehicles-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+/* Style des plaques d'immatriculation */
+.vehicle-plate, span[class*="immat"] {
+  background: var(--navy);
+  color: white;
+  font-size: .75rem;
+  font-weight: 700;
+  padding: .2rem .6rem;
+  border-radius: 4px;
+  letter-spacing: .05em;
+}
+
+/* ---------- Modale stylisée ---------- */
+#modal-docs:not(.hidden) {
+  display: flex !important;
+  animation: fadeIn 0.2s ease-out;
+  backdrop-filter: blur(4px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+#modal-docs .bg-white {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+
+/* Scrollbar professionnelle pour la liste des documents */
+#docs-list::-webkit-scrollbar {
+  width: 6px;
+}
+#docs-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+#docs-list::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 10px;
+}
+#docs-list::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text-muted);
+}
+
+/* ---------- Spinner de chargement ---------- */
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--orange);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
